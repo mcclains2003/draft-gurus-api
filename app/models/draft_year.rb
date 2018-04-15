@@ -1,0 +1,2 @@
+class DraftYear < ApplicationRecord
+end
