@@ -1,4 +1,4 @@
-class PlayersController < ApplicationController
+class API::PlayersController < ApplicationController
     before_action :set_player, only: [:show, :update, :destroy]
 
     def index
