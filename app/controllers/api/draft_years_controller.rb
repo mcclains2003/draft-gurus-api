@@ -1,4 +1,4 @@
-class API::DraftYearController < ApplicationController
+class API::DraftYearsController < ApplicationController
     before_action :set_draft_year, only: [:show, :update, :destroy]
 
     def index

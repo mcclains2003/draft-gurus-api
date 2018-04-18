@@ -1,4 +1,4 @@
-class API::DraftController < ApplicationController
+class API::DraftsController < ApplicationController
     before_action :set_draft, only: [:show, :update, :destroy]
 
     def index
