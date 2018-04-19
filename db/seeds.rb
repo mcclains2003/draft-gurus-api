@@ -63,8 +63,8 @@
 #     end
 # end
 
-drafts = ["Shaun's Awesome Picks", "Justin's OK Picks", "2018 NFL Draft"]
+# drafts = ["Shaun's Awesome Picks", "Justin's OK Picks", "2018 NFL Draft"]
 
-drafts.each do |draft|
-    Draft.create!(title: draft, draft_year_id: DraftYear.find(1))
-end
+# drafts.each do |draft|
+#     Draft.create!(title: draft)
+# end
