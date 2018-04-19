@@ -1,4 +1,4 @@
 class Player < ApplicationRecord
-    belongs_to :team
-    belongs_to :pick
+    belongs_to :team, optional: true
+    belongs_to :pick, optional: true
 end
