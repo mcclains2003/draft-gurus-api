@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_15_000243) do
+ActiveRecord::Schema.define(version: 2018_04_20_145759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "draft_rounds", force: :cascade do |t|
+    t.bigint "draft_id"
+    t.bigint "round_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["draft_id"], name: "index_draft_rounds_on_draft_id"
+    t.index ["round_id"], name: "index_draft_rounds_on_round_id"
+  end
 
   create_table "draft_years", force: :cascade do |t|
     t.string "year"
@@ -30,13 +39,15 @@ ActiveRecord::Schema.define(version: 2018_04_15_000243) do
   end
 
   create_table "picks", force: :cascade do |t|
-    t.string "number"
+    t.integer "number"
     t.bigint "round_id"
     t.bigint "player_id"
+    t.bigint "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["player_id"], name: "index_picks_on_player_id"
     t.index ["round_id"], name: "index_picks_on_round_id"
+    t.index ["team_id"], name: "index_picks_on_team_id"
   end
 
   create_table "players", force: :cascade do |t|

@@ -1,5 +1,65 @@
 # Uncomment out for Heroku seeding
 
+# Seed Draft Year ***************************
+
+# DraftYear.create(year: "2018")
+
+# Seed Draft Year  ends**********************
+
+
+
+# Seed Drafts ******************************
+
+# drafts = ["Shaun's Awesome Picks", "Justin's OK Picks", "2018 NFL Draft"]
+
+# drafts.each do |draft|
+#     Draft.create!(title: draft)
+# end
+
+# Seed Drafts ends***************************
+
+
+
+# Seed Rounds *****************************
+
+# rounds = [*1..7]
+
+# rounds.each do |round|
+#     Round.create!(round: round)
+# end
+
+# Seed Rounds ends*************************
+
+
+
+# Seed Picks ******************************
+
+# picks = [*1..256]
+
+# picks.each do |pick|
+#     if pick >= 1 && pick <= 32
+#         Pick.create!(number: pick, round_id: 1)
+#     elsif pick >= 33 && pick <= 64
+#         Pick.create!(number: pick, round_id: 2)
+#     elsif pick >= 65 && pick <= 100
+#         Pick.create!(number: pick, round_id: 3)
+#     elsif pick >= 101 && pick <= 137
+#         Pick.create!(number: pick, round_id: 4)
+#     elsif pick >= 138 && pick <= 174
+#         Pick.create!(number: pick, round_id: 5)
+#     elsif pick >= 175 && pick <= 218
+#         Pick.create!(number: pick, round_id: 6)    
+#     elsif pick >= 219
+#         Pick.create!(number: pick, round_id: 7)
+#     end
+# end
+
+# Seed Picks ends*************************
+
+
+
+# Seed Teams *****************************
+
 # teams = ["Arizona Cardinals", 
 #     "Atlanta Falcons", 
 #     "Baltimore Ravens", 
@@ -37,34 +97,24 @@
 #         Team.create!(name: team)
 #     end
 
-# rounds = [*1..7]
+# Seed Teams ends *************************
 
-# rounds.each do |round|
-#     Round.create!(round: round)
-# end
 
-# picks = [*1..256]
 
-# picks.each do |pick|
-#     if pick >= 1 && pick <= 32
-#         Pick.create!(number: pick.to_s, round_id: 1)
-#     elsif pick >= 33 && pick <= 64
-#         Pick.create!(number: pick.to_s, round_id: 2)
-#     elsif pick >= 65 && pick <= 100
-#         Pick.create!(number: pick.to_s, round_id: 3)
-#     elsif pick >= 101 && pick <= 137
-#         Pick.create!(number: pick.to_s, round_id: 4)
-#     elsif pick >= 138 && pick <= 174
-#         Pick.create!(number: pick.to_s, round_id: 5)
-#     elsif pick >= 175 && pick <= 218
-#         Pick.create!(number: pick.to_s, round_id: 6)    
-#     elsif pick >= 219
-#         Pick.create!(number: pick.to_s, round_id: 7)
-#     end
-# end
+# To Seed Players do below*****************
 
-# drafts = ["Shaun's Awesome Picks", "Justin's OK Picks", "2018 NFL Draft"]
+# run rake players:fetch to scrape player data into Player database
 
-# drafts.each do |draft|
-#     Draft.create!(title: draft)
-# end
+# Seed Players end*************************
+
+
+
+# Seed Drafts into the draft year ***********
+
+currentDraft = DraftYear.first
+
+currentDraft.drafts << Draft.find(1)
+currentDraft.drafts << Draft.find(2)
+currentDraft.drafts << Draft.find(3)
+
+# Seed Drafts into the draft year ends*******
