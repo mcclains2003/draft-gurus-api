@@ -20,3 +20,4 @@ TEAM: { name: “Dallas Cowboys” } - done?
 PLAYER: { name: “Saquon Barkley, school: “Penn St.”, year: “Jr”, position: “RB”, height: “6-0”, weight: 233 } - done?
  - Belongs to a pick
  - Belongs to a team
+
