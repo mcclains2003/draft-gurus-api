@@ -1,4 +1,4 @@
-class API::PickController < ApplicationController
+class API::PicksController < ApplicationController
     before_action :set_pick, only: [:show, :update, :destroy]
 
     def index
