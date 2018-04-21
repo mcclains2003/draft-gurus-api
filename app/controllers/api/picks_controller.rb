@@ -2,7 +2,13 @@ class API::PicksController < ApplicationController
     before_action :set_pick, only: [:show, :update, :destroy]
 
     def index
-      render json: Pick.all
+        if params[:team_id]
+            render json: Team.find(params[:team_id]).picks.sort
+        elsif params[:round_id]
+            render json: Round.find(params[:round_id]).picks.sort
+        else
+            render json: Pick.all
+        end
     end
   
     def show
