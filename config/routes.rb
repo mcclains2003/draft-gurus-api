@@ -7,14 +7,18 @@ Rails.application.routes.draw do
     end
 
     resources :drafts do
-      resources :rounds do
-        resources :picks
-      end
+      resources :rounds
     end
 
-    # resources :rounds do
-    #   resources :picks
-    # end
+    resources :rounds do
+      resources :picks
+    end
+
+    resources :teams do
+      resources :picks
+    end
+
+    resources :players
 
   end
 
