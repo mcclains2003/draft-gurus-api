@@ -19,44 +19,37 @@ end
 # Seed Drafts ends***************************
 
 
-
-# Seed Rounds *****************************
-
-rounds = [*1..7]
-
-rounds.each do |round|
-    Round.create!(round: round)
-end
-
-# Seed Rounds ends*************************
-
-
-
 # Seed Picks ******************************
 
 picks = [*1..256]
 
 picks.each do |pick|
     if pick >= 1 && pick <= 32
-        Pick.create!(number: pick, round_id: 1)
+        Pick.create!(number: pick, round: 1)
     elsif pick >= 33 && pick <= 64
-        Pick.create!(number: pick, round_id: 2)
+        Pick.create!(number: pick, round: 2)
     elsif pick >= 65 && pick <= 100
-        Pick.create!(number: pick, round_id: 3)
+        Pick.create!(number: pick, round: 3)
     elsif pick >= 101 && pick <= 137
-        Pick.create!(number: pick, round_id: 4)
+        Pick.create!(number: pick, round: 4)
     elsif pick >= 138 && pick <= 174
-        Pick.create!(number: pick, round_id: 5)
+        Pick.create!(number: pick, round: 5)
     elsif pick >= 175 && pick <= 218
-        Pick.create!(number: pick, round_id: 6)
+        Pick.create!(number: pick, round: 6)
     elsif pick >= 219
-        Pick.create!(number: pick, round_id: 7)
+        Pick.create!(number: pick, round: 7)
     end
 end
 
 # Seed Picks ends*************************
 
+# Seed draft picks ***********************
 
+Draft.all.each do |draft|
+    draft.picks << Pick.all
+end
+
+# Seed draft picks ends*******************
 
 # Seed Teams *****************************
 
@@ -121,24 +114,6 @@ currentDraft.drafts << Draft.find(3)
 
 
 
-# Seed Rounds into the individual drafts*****
-
-drafts = Draft.all
-
-drafts.each do |draft|
-    draft.rounds << Round.find(1)
-    draft.rounds << Round.find(2)
-    draft.rounds << Round.find(3)
-    draft.rounds << Round.find(4)
-    draft.rounds << Round.find(5)
-    draft.rounds << Round.find(6)
-    draft.rounds << Round.find(7)
-end
-
-# Seed Rounds into the individual drafts end**
-
-
-
 # Seed Team with Picks ***********************
 
     arizona = Team.find(1)
@@ -179,15 +154,15 @@ end
     baltimore.picks << [Pick.find(16), Pick.find(52), Pick.find(83), Pick.find(118), Pick.find(154), Pick.find(190), Pick.find(215), Pick.find(238)]
     buffalo.picks << [Pick.find(12), Pick.find(22), Pick.find(53), Pick.find(56), Pick.find(65), Pick.find(96), Pick.find(121), Pick.find(166), Pick.find(187)]
     carolina.picks << [Pick.find(24), Pick.find(55), Pick.find(85), Pick.find(88), Pick.find(161), Pick.find(197), Pick.find(234), Pick.find(242)]
-    chicago.picks << [Pick.find(8), Pick.find(39), Pick.find(101), Pick.find(111), Pick.find(136), Pick.find(167), Pick.find(198)]
+    chicago.picks << [Pick.find(8), Pick.find(39), Pick.find(105), Pick.find(115), Pick.find(145), Pick.find(181), Pick.find(224)]
     cincinnati.picks << [Pick.find(21), Pick.find(46), Pick.find(77), Pick.find(100), Pick.find(112), Pick.find(151), Pick.find(158), Pick.find(170), Pick.find(249), Pick.find(252), Pick.find(253)]
-    cleveland.picks << [Pick.find(1), Pick.find(4), Pick.find(33), Pick.find(35), Pick.find(64), Pick.find(110), Pick.find(141), Pick.find(161), Pick.find(191)]
+    cleveland.picks << [Pick.find(1), Pick.find(4), Pick.find(33), Pick.find(35), Pick.find(64), Pick.find(114), Pick.find(150), Pick.find(175), Pick.find(188)]
     dallas.picks << [Pick.find(19), Pick.find(50), Pick.find(81), Pick.find(116), Pick.find(137), Pick.find(171), Pick.find(192), Pick.find(193), Pick.find(208), Pick.find(236)]
-    denver.picks << [Pick.find(5), Pick.find(40), Pick.find(71), Pick.find(102), Pick.find(105), Pick.find(133), Pick.find(151), Pick.find(154), Pick.find(168)]
+    denver.picks << [Pick.find(5), Pick.find(40), Pick.find(71), Pick.find(99), Pick.find(106), Pick.find(113), Pick.find(149), Pick.find(160)]
     detroit.picks << [Pick.find(20), Pick.find(51), Pick.find(82), Pick.find(117), Pick.find(153), Pick.find(237)]
     packers.picks << [Pick.find(14), Pick.find(45), Pick.find(76), Pick.find(101), Pick.find(133), Pick.find(138), Pick.find(172), Pick.find(174), Pick.find(186), Pick.find(207), Pick.find(232), Pick.find(239)]
     houston.picks << [Pick.find(68), Pick.find(80), Pick.find(98), Pick.find(103), Pick.find(177), Pick.find(211), Pick.find(214), Pick.find(222)]
-    colts.picks << [Pick.find(6), Pick.find(36), Pick.find(37), Pick.find(49), Pick.find(67), Pick.find(100), Pick.find(131), Pick.find(164), Pick.find(195)]
+    colts.picks << [Pick.find(6), Pick.find(36), Pick.find(37), Pick.find(49), Pick.find(67), Pick.find(104), Pick.find(140), Pick.find(178), Pick.find(221)]
     jags.picks << [Pick.find(29), Pick.find(61), Pick.find(93), Pick.find(129), Pick.find(203), Pick.find(230), Pick.find(247)]
     chiefs.picks << [Pick.find(54), Pick.find(78), Pick.find(86), Pick.find(122), Pick.find(124), Pick.find(196), Pick.find(233), Pick.find(243)]
     rams.picks << [Pick.find(87), Pick.find(111), Pick.find(135), Pick.find(136), Pick.find(176), Pick.find(183), Pick.find(194), Pick.find(195)]
@@ -196,15 +171,84 @@ end
     minnesota.picks << [Pick.find(30), Pick.find(62), Pick.find(94), Pick.find(167), Pick.find(204), Pick.find(213), Pick.find(218), Pick.find(225)]
     patriots.picks << [Pick.find(23), Pick.find(31), Pick.find(43), Pick.find(63), Pick.find(95), Pick.find(198), Pick.find(210), Pick.find(219)]
     saints.picks << [Pick.find(27), Pick.find(91), Pick.find(127), Pick.find(147), Pick.find(164), Pick.find(189), Pick.find(201), Pick.find(245)]
-    giants.picks << [Pick.find(2), Pick.find(34), Pick.find(66), Pick.find(69), Pick.find(104), Pick.find(130)]
-    jets.picks << [Pick.find(3), Pick.find(72), Pick.find(103), Pick.find(148), Pick.find(165), Pick.find(209)]
+    giants.picks << [Pick.find(2), Pick.find(34), Pick.find(66), Pick.find(69), Pick.find(108), Pick.find(139)]
+    jets.picks << [Pick.find(3), Pick.find(72), Pick.find(107), Pick.find(157), Pick.find(179), Pick.find(235)]
     oakland.picks << [Pick.find(10), Pick.find(41), Pick.find(75), Pick.find(110), Pick.find(159), Pick.find(173), Pick.find(185), Pick.find(212), Pick.find(216), Pick.find(217), Pick.find(228)]
     philadelphia.picks << [Pick.find(32), Pick.find(130), Pick.find(132), Pick.find(169), Pick.find(206), Pick.find(250)]
     pittsburgh.picks << [Pick.find(28), Pick.find(60), Pick.find(92), Pick.find(148), Pick.find(165), Pick.find(220), Pick.find(246)]
     sf.picks << [Pick.find(9), Pick.find(59), Pick.find(70), Pick.find(74), Pick.find(128), Pick.find(143), Pick.find(184), Pick.find(223), Pick.find(240)]
     seattle.picks << [Pick.find(18), Pick.find(120), Pick.find(141), Pick.find(146), Pick.find(156), Pick.find(168), Pick.find(226), Pick.find(248)]
-    buccaneers.picks << [Pick.find(7), Pick.find(38), Pick.find(98), Pick.find(135), Pick.find(166), Pick.find(188)]
+    buccaneers.picks << [Pick.find(7), Pick.find(38), Pick.find(102), Pick.find(144), Pick.find(180), Pick.find(202), Pick.find(255)]
     tennessee.picks << [Pick.find(25), Pick.find(57), Pick.find(89), Pick.find(125), Pick.find(162), Pick.find(199)]
     washington.picks << [Pick.find(13), Pick.find(44), Pick.find(109), Pick.find(142), Pick.find(163), Pick.find(205), Pick.find(231), Pick.find(241)]
 
 # Seed Team with Picks ends ******************
+
+# Seed fix for missing players ***************
+
+cs = Player.find(5)
+cs.name = "Courtland Sutton"
+cs.school = "Southern Methodist"
+cs.save
+
+md = Player.find(20)
+md.name = "Marcus Davenport"
+md.school = "UTSA"
+md.save
+
+jl = Player.find(84)
+jl.name = "Justin Lawler"
+jl.school = "Southern Methodist"
+jl.save
+
+is = Player.find(85)
+is.name = "Ito Smith"
+is.school = "Southern Mississippi"
+is.save
+
+tm = Player.find(85)
+tm.name = "Tarvarius Moore"
+tm.school = "Southern Mississippi"
+tm.save
+
+tm = Player.find(108)
+tm.name = "Nathan Shepherd"
+tm.school = "Fort Hays State"
+tm.save
+
+tm = Player.find(119)
+tm.name = "Desmond Harrison"
+tm.school = "West Georgia"
+tm.save
+
+tm = Player.find(140)
+tm.name = "Trey Quinn"
+tm.school = "Southern Methodist"
+tm.save
+
+tm = Player.find(152)
+tm.name = "Korey Robertson"
+tm.school = "Southern Mississippi"
+tm.save
+
+tm = Player.find(217)
+tm.name = "Alex Cappa"
+tm.school = "Humboldt State"
+tm.save
+
+tm = Player.find(310)
+tm.name = "Michael Joseph"
+tm.school = "Dubuque"
+tm.save
+
+tm = Player.find(366)
+tm.name = "Max Redfield"
+tm.school = "Indiana (PA)"
+tm.save
+
+tm = Player.find(377)
+tm.name = "Devron Davis"
+tm.school = "UTSA"
+tm.save
+
+# Seed fix for missing players end ***********

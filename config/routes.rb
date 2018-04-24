@@ -7,10 +7,6 @@ Rails.application.routes.draw do
     end
 
     resources :drafts do
-      resources :rounds
-    end
-
-    resources :rounds do
       resources :picks
     end
 
