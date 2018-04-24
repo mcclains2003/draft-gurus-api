@@ -1,4 +1,10 @@
 class Pick < ApplicationRecord
-    belongs_to :player, optional: true
-    belongs_to :team, optional: true
+    has_many :team_picks
+    has_many :team, :through => :team_picks
+
+    has_many :draft_picks
+    has_many :drafts, :through => :draft_picks
+
+    has_many :player_picks
+    has_many :players, :through => :player_picks
 end

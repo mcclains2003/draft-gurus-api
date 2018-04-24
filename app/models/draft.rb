@@ -1,5 +1,6 @@
 class Draft < ApplicationRecord
-    has_many :draft_rounds
-    has_many :rounds, :through => :draft_rounds
     belongs_to :year, optional: true
+
+    has_many :draft_picks
+    has_many :picks, :through => :draft_picks
 end
