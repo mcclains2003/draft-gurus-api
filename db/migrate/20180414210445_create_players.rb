@@ -7,8 +7,6 @@ class CreatePlayers < ActiveRecord::Migration[5.2]
       t.string :position
       t.string :height
       t.string :weight
-      t.belongs_to :pick, index: true
-      t.belongs_to :team, index: true
 
       t.timestamps
     end
