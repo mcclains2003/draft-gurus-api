@@ -10,18 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_20_145759) do
+ActiveRecord::Schema.define(version: 2018_04_24_163728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "draft_rounds", force: :cascade do |t|
-    t.bigint "draft_id"
-    t.bigint "round_id"
+  create_table "draft_picks", force: :cascade do |t|
+    t.integer "draft_id"
+    t.integer "pick_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["draft_id"], name: "index_draft_rounds_on_draft_id"
-    t.index ["round_id"], name: "index_draft_rounds_on_round_id"
   end
 
   create_table "draft_years", force: :cascade do |t|
@@ -40,14 +38,27 @@ ActiveRecord::Schema.define(version: 2018_04_20_145759) do
 
   create_table "picks", force: :cascade do |t|
     t.integer "number"
-    t.bigint "round_id"
+    t.integer "round"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "player_picks", force: :cascade do |t|
+    t.bigint "player_id"
+    t.bigint "pick_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pick_id"], name: "index_player_picks_on_pick_id"
+    t.index ["player_id"], name: "index_player_picks_on_player_id"
+  end
+
+  create_table "player_teams", force: :cascade do |t|
     t.bigint "player_id"
     t.bigint "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["player_id"], name: "index_picks_on_player_id"
-    t.index ["round_id"], name: "index_picks_on_round_id"
-    t.index ["team_id"], name: "index_picks_on_team_id"
+    t.index ["player_id"], name: "index_player_teams_on_player_id"
+    t.index ["team_id"], name: "index_player_teams_on_team_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -57,18 +68,17 @@ ActiveRecord::Schema.define(version: 2018_04_20_145759) do
     t.string "position"
     t.string "height"
     t.string "weight"
-    t.bigint "pick_id"
-    t.bigint "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["pick_id"], name: "index_players_on_pick_id"
-    t.index ["team_id"], name: "index_players_on_team_id"
   end
 
-  create_table "rounds", force: :cascade do |t|
-    t.string "round"
+  create_table "team_picks", force: :cascade do |t|
+    t.bigint "team_id"
+    t.bigint "pick_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["pick_id"], name: "index_team_picks_on_pick_id"
+    t.index ["team_id"], name: "index_team_picks_on_team_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -77,4 +87,10 @@ ActiveRecord::Schema.define(version: 2018_04_20_145759) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "player_picks", "picks"
+  add_foreign_key "player_picks", "players"
+  add_foreign_key "player_teams", "players"
+  add_foreign_key "player_teams", "teams"
+  add_foreign_key "team_picks", "picks"
+  add_foreign_key "team_picks", "teams"
 end
