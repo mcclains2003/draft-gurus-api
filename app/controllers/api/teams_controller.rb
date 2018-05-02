@@ -9,31 +9,31 @@ class API::TeamsController < ApplicationController
       render json: @team
     end
   
-    def create
-      @team = Team.new(team_params)
+    # def create
+    #   @team = Team.new(team_params)
       
-      if @team.save
-          render json: @team
-      else
-          render_errors_in_json
-      end
-    end
+    #   if @team.save
+    #       render json: @team
+    #   else
+    #       render_errors_in_json
+    #   end
+    # end
   
-    def update
-      if @team.update(team_params)
-          render json: @team
-      else
-          render_errors_in_json
-      end
-    end
+    # def update
+    #   if @team.update(team_params)
+    #       render json: @team
+    #   else
+    #       render_errors_in_json
+    #   end
+    # end
   
-    def destroy
-      if @team.destroy
-        render json: @team, status: 200
-      else
-        render json: { message: "Unable to remove this team!" }, status:400
-      end
-    end
+    # def destroy
+    #   if @team.destroy
+    #     render json: @team, status: 200
+    #   else
+    #     render json: { message: "Unable to remove this team!" }, status:400
+    #   end
+    # end
   
     private
   

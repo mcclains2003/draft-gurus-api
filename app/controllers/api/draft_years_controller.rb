@@ -9,31 +9,31 @@ class API::DraftYearsController < ApplicationController
       render json: @draft_year
     end
   
-    def create
-      @draft_year = DraftYear.new(draft_year_params)
+    # def create
+    #   @draft_year = DraftYear.new(draft_year_params)
       
-      if @draft_year.save
-          render json: @draft_year
-      else
-          render_errors_in_json
-      end
-    end
+    #   if @draft_year.save
+    #       render json: @draft_year
+    #   else
+    #       render_errors_in_json
+    #   end
+    # end
   
-    def update
-      if @draft_year.update(draft_year_params)
-          render json: @draft_year
-      else
-          render_errors_in_json
-      end
-    end
+    # def update
+    #   if @draft_year.update(draft_year_params)
+    #       render json: @draft_year
+    #   else
+    #       render_errors_in_json
+    #   end
+    # end
   
-    def destroy
-      if @draft_year.destroy
-        render json: @draft_year, status: 200
-      else
-        render json: { message: "Unable to Remove this draft year!" }, status:400
-      end
-    end
+    # def destroy
+    #   if @draft_year.destroy
+    #     render json: @draft_year, status: 200
+    #   else
+    #     render json: { message: "Unable to Remove this draft year!" }, status:400
+    #   end
+    # end
   
     private
   

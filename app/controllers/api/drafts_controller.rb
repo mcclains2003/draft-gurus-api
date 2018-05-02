@@ -9,31 +9,31 @@ class API::DraftsController < ApplicationController
       render json: @draft
     end
   
-    def create
-      @draft = Draft.new(draft_params)
+    # def create
+    #   @draft = Draft.new(draft_params)
       
-      if @draft.save
-          render json: @draft
-      else
-          render_errors_in_json
-      end
-    end
+    #   if @draft.save
+    #       render json: @draft
+    #   else
+    #       render_errors_in_json
+    #   end
+    # end
   
-    def update
-      if @draft.update(draft_params)
-          render json: @draft
-      else
-          render_errors_in_json
-      end
-    end
+    # def update
+    #   if @draft.update(draft_params)
+    #       render json: @draft
+    #   else
+    #       render_errors_in_json
+    #   end
+    # end
   
-    def destroy
-      if @draft.destroy
-        render json: @draft, status: 200
-      else
-        render json: { message: "Unable to Remove this draft!" }, status:400
-      end
-    end
+    # def destroy
+    #   if @draft.destroy
+    #     render json: @draft, status: 200
+    #   else
+    #     render json: { message: "Unable to Remove this draft!" }, status:400
+    #   end
+    # end
   
     private
   
